@@ -4,8 +4,8 @@
 // Pin Definitions
 const int trigPin = 12;
 const int echoPin = 11;
-const int trigPin1 = 8;
-const int echoPin1 = 9;
+const int trigPin1 = 7;
+const int echoPin1 = 6;
 const int trigPinm = 4;
 const int echoPinm = 5;
 const int led = 13;
@@ -21,7 +21,7 @@ byte gammatable[256];
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
 
 void setup() {
-  Serial.begin(115200); // Faster baud rate for quicker serial communication
+  Serial.begin(9600); // Faster baud rate for quicker serial communication
   
   // Set pin modes
   pinMode(trigPin, OUTPUT);
@@ -56,11 +56,12 @@ void loop() {
   tcs.setInterrupt(true); // Turn off LED
 
   String result;
-  if (int(blue) > int(red)) {
+  int sum=int(red)-int(blue);
+  if (sum>=5 && sum<=55) {
     result = "b";
-  } else if (int(red) > int(green) && int(red) - int(green) <= 35) {
+  } else if (sum>=60 && sum<=75) {
     result = "w";
-  } else {
+  } else if (sum>=85){
     result = "r";
   }
 
