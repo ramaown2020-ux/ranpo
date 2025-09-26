@@ -112,4 +112,17 @@ def main():
             time.sleep(2)  # wait, then continue
 
         # Keep robot centered
-        if distance is no
+        if distance is not None and distance1 is not None:
+            center_robot(distance, distance1)
+
+        time.sleep(0.1)
+
+
+# ---------------- Run Program ----------------
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Program stopped manually.")
+    finally:
+        car.Car_Stop()
